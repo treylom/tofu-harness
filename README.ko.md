@@ -19,7 +19,7 @@
 
 ## 신규: 새 모델의 원칙에 내 하네스를 점검하기
 
-**2026-07-24 Claude Opus 5가 출시**됐고([TechCrunch](https://techcrunch.com/2026/07/24/anthropic-launches-opus-5/) · [Axios](https://www.axios.com/2026/07/24/anthropic-releases-new-model-opus-5)), "CLAUDE.md를 어떻게 써야 하나"에 대한 모델별 지침도 함께 갱신됐다. 커뮤니티는 이를 점검 가능한 원칙으로 압축했다 — 아래 표는 널리 공유된 7원칙 정리([@nextcocoai, Threads](https://www.threads.com/@nextcocoai/post/DbNuHBnlBrW))를 따르되, 저자 스스로 남긴 "전문가가 아닙니다. 반드시 검증하세요"에 따라 **우리의 검증 소견을 병기**한 것이다:
+**2026-07-24 Claude Opus 5가 출시**됐고([TechCrunch](https://techcrunch.com/2026/07/24/anthropic-launches-opus-5/) · [Axios](https://www.axios.com/2026/07/24/anthropic-releases-new-model-opus-5)), "하네스를 어떻게 써야 하나"에 대한 앤트로픽 1차 문서도 함께 나왔다. 이 스킬 뒤의 감사가 실제로 대조한 것은 그 두 문서다: 공식 [Prompting Claude Opus 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5) 가이드(검증 지시는 과검증을 유발하니 제거하라, "심각한 것만 보고하라" 류 축소어는 산출을 문자 그대로 줄인다 — 전부 보고하고 후단에서 걸러라)와 [The new rules of context engineering for Claude 5 generation models](https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models) 블로그(`/doctor` 를 함께 실은 그 글). 아래 표는 이 지침을 점검 가능한 7원칙으로 압축한 커뮤니티 정리([@nextcocoai, Threads](https://www.threads.com/@nextcocoai/post/DbNuHBnlBrW))를 **교차 확인용**으로 따르되, 저자 스스로 남긴 "전문가가 아닙니다. 반드시 검증하세요"에 따라 **우리의 검증 소견을 병기**한 것이다:
 
 | # | 원칙 (요약) | 내 하네스에 점검할 것 |
 |---|---|---|
