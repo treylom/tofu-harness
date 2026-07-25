@@ -6,7 +6,7 @@
 
 Two pillars, one repo:
 
-1. **Transfer & enforce** (the original `tofable`): rule layer + mechanical verification gates + the benchmark that measures whether the working style actually transfers.
+1. **Transfer & enforce** (the original `tofable`, invoked as `/tofable`): rule layer + mechanical verification gates + the benchmark that measures whether the working style actually transfers.
 2. **Audit & repair** (new, 2026-07): the [`/harness-audit` skill](skills/harness-audit/SKILL.md) — a deadline-bounded, parallel census that finds where your `CLAUDE.md` / skills / rules have drifted from reality, verifies each finding independently, and repairs only what's confirmed.
 
 > **How this relates to [`fable-ish-codex`](https://github.com/Pandoll-AI/fable-ish-codex):** the hook design here is borrowed from that Codex plugin by Pandoll-AI (credited in [NOTICE](./NOTICE)). What `tofable` contributes on its own: **the benchmark that measures whether the harness actually transfers the working style**, and **a Claude Code port of the gates**. On Codex? The fastest path is to install the original plugin (see [`codex/`](./codex/)) — this repo is where the measurement lives.
