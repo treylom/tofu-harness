@@ -1,8 +1,13 @@
-# tofable
+# tofu-harness (formerly `tofable`)
 
 > 🇰🇷 **한국어 버전: [README.ko.md](README.ko.md)**
 
-**A method for transferring "how a strong model works" into a harness — rules + verification gates + a benchmark — so other models inherit the working style.**
+**Keep an AI-agent harness honest — transfer a strong model's working style (rules + verification gates + a benchmark), and audit the harness documents themselves so they keep telling the truth.**
+
+Two pillars, one repo:
+
+1. **Transfer & enforce** (the original `tofable`): rule layer + mechanical verification gates + the benchmark that measures whether the working style actually transfers.
+2. **Audit & repair** (new, 2026-07): the [`/harness-audit` skill](skills/harness-audit/SKILL.md) — a deadline-bounded, parallel census that finds where your `CLAUDE.md` / skills / rules have drifted from reality, verifies each finding independently, and repairs only what's confirmed.
 
 > **How this relates to [`fable-ish-codex`](https://github.com/Pandoll-AI/fable-ish-codex):** the hook design here is borrowed from that Codex plugin by Pandoll-AI (credited in [NOTICE](./NOTICE)). What `tofable` contributes on its own: **the benchmark that measures whether the harness actually transfers the working style**, and **a Claude Code port of the gates**. On Codex? The fastest path is to install the original plugin (see [`codex/`](./codex/)) — this repo is where the measurement lives.
 
@@ -10,7 +15,44 @@
 
 This repo is the public, generalized distribution of that harness. Internal names, paths, and identifiers from the environment it was developed in have been stripped; the logic and the measurement methodology have not.
 
-![A strong model's working discipline transferring through a gate harness to another model](./assets/hero-discipline-transfer.png)
+![Auditing a harness: scanning agent documents for dead links and stale labels, gates passing only verified repairs](./assets/hero-harness-audit.png)
+
+## New: audit your harness against a new model's principles
+
+**Claude Opus 5 shipped on 2026-07-24** ([TechCrunch](https://techcrunch.com/2026/07/24/anthropic-launches-opus-5/) · [Axios](https://www.axios.com/2026/07/24/anthropic-releases-new-model-opus-5)), and with it a fresh round of model-specific guidance on how a `CLAUDE.md` should be written. Community digests condensed it into checkable principles — the table below follows one widely-shared 7-principle digest ([@nextcocoai on Threads](https://www.threads.com/@nextcocoai/post/DbNuHBnlBrW); the author's own caveat "I'm not an expert — verify everything" applies, and our verification notes are included):
+
+| # | Principle (digest) | Check it against your harness |
+|---|---|---|
+| 1 | Don't write what the model already does (verify/re-check instructions duplicate built-in behavior) | ⚠️ **Partially** — delete *generic* "double-check" lines, but keep gates born from real regressions: our audit found the model repeatedly *not* doing the thing the rule enforces. Rule of thumb: no incident history behind it → delete candidate; incident history → keep |
+| 2 | Only specify the four things models don't self-regulate: response length, reporting cadence, document length, delegation ceiling | ✅ good entry question for every new rule (retrofit existing docs next-touch only) |
+| 3 | Positive examples over prohibitions | ✅ for style rules; prohibitions still earn their keep when they block one exact failure path |
+| 4 | No minimizers ("only the serious ones") — collect everything, filter in a second stage | ✅ this is literally how `/harness-audit`'s two-stage verify works (collect everything, then independent re-verification) |
+| 5 | Stop scope creep — "exactly the requested scope", halt before clearly out-of-scope actions | ✅ the skill's guards ①–③ exist because of this failure mode |
+| 6 | Give the full spec up front, then leave it alone; approval gates only for hard-to-reverse actions | ✅ matches the autonomy pricing this repo's rules use |
+| 7 | Long files: repeat a 2–3 line reminder at the end | 🧪 worth an experiment — long-prompt dilution is real |
+
+`/harness-audit` is the systematic version of "go check": census every harness document on four axes (tool-mismatch · stale · dead-link · conflict), re-verify findings with independent workers, repair only what's confirmed — inside a deadline. In its origin run (a single overnight pass, one harness, 252 documents) it confirmed 49 defects and repaired **all of them** — one commit spanning 47 files, plus 2 sibling fixes. Those counts carry their scope label on purpose: per-document verdicts, not aggregates, are the reliable unit (see the STEP 2 note in the skill).
+
+**How the pieces fit together** (use all four, they cover different layers):
+
+| Layer | Tool | Question it answers |
+|---|---|---|
+| Plan | Superpowers brainstorming / Ouroboros interview / any spec tool | *What* should change, in what scope, by when — decide **before** touching ~250 files |
+| Installation | Claude Code's built-in `/doctor` | Is the *setup* healthy — settings parse, duplicate installs, unused extensions |
+| Documents | **`/harness-audit`** (this repo) | Do your harness documents *tell the truth* about tools, paths, models, and each other |
+| Behavior | **the gates** (`hooks/`, this repo) | Does the agent actually *do* what the documents say — mechanically, at Stop/PreToolUse time |
+
+A repaired rule that never fires is decoration — wire it (gates). A firing gate built on a stale rule enforces yesterday's truth — audit it (skill). Plan first so neither eats your night; run `/doctor` so you're not auditing a broken install.
+
+**Usage** (friendly version):
+
+```
+1. Tell your agent:  "run harness-audit, deadline 2 hours, scope: this project + my home config"
+2. It declares 3 deliverables (census table · repair commits · disposition list) and fixes the file list first
+3. Parallel workers judge every document on 4 axes  →  different workers re-verify each finding from scratch
+4. Only CONFIRMED findings get repaired, centrally, with unique-match safety; everything else lands in the disposition list
+5. Optional (it will ask): non-destructive runtime smokes of your most-used skills
+```
 
 ## Start here
 
@@ -19,6 +61,7 @@ This repo is the public, generalized distribution of that harness. Internal name
 | on **Claude Code**, want the verification gate | copy [`hooks/`](hooks/) and follow the [step-by-step install](hooks/README.md) (~5 min), then seed your rule layer from the examples in [`rules/`](rules/) |
 | on **Codex** | install the upstream plugin [`fable-ish-codex`](https://github.com/Pandoll-AI/fable-ish-codex) instead — see [`codex/README.md`](codex/README.md) |
 | here to **measure** whether a harness actually transfers a working style | start at [Key finding](#key-finding) below, then run [`bench/`](bench/) against your own model |
+| here because **a new model just shipped** and your harness may be stale | read [`skills/harness-audit/SKILL.md`](skills/harness-audit/SKILL.md) and run it with a deadline |
 
 ![infographic](./docs/infographic-en.png)
 
@@ -114,7 +157,7 @@ The whole procedure is packaged to rerun on your own fleet:
 ## Repo structure
 
 ```
-tofable/
+tofu-harness/
 ├── README.md            — this file
 ├── LICENSE               — MIT (this repo's own contributions)
 ├── NOTICE                — Apache-2.0 attribution for the ported hook design
@@ -122,6 +165,8 @@ tofable/
 │   ├── method.md          — the transfer method: rule patterns, verification ledger/stop-gate, benchmark loop, mining loop
 │   ├── gate-audit-playbook.md — the audit loop: decide which gates each agent actually needs, with measurements
 │   └── infographic-en.png / infographic-ko.png  — summary graphics (en / ko; source: infographic-src.html — edit text + re-render to refresh)
+├── skills/
+│   └── harness-audit/     — the audit skill: census → independent re-verify → central repair (7 guards)
 ├── rules/                 — copyable example rule layer (situation index + trigger-keyed rule files)
 ├── hooks/                 — harness-agnostic, generalized verification hooks (evidence ledger + stop-gate)
 │   ├── requirements-lock.py   — opt-in completion-bias guard (locked feature signatures must keep existing)

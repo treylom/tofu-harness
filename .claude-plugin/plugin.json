@@ -1,9 +1,9 @@
 {
-  "name": "tofable-kit",
-  "description": "The tofable working discipline as an invocable skill (/tofable): honest decomposition, prompt refinement with /prompt integration and a plain-prompting fallback, evidence-first execution, honest completion. Skill-only packaging — the verification gates under hooks/ install separately (see hooks/README.md).",
-  "version": "0.1.0",
+  "name": "tofu-harness",
+  "description": "Harness discipline for AI agents: the tofable working discipline as an invocable skill (/tofable) plus /harness-audit — a deadline-bounded census-verify-repair pass that checks your harness documents (CLAUDE.md / AGENTS.md / SKILL.md / rules) against a new model's principles. Skill-only packaging — the verification gates under hooks/ install separately (see hooks/README.md).",
+  "version": "0.2.0",
   "author": { "name": "tofukyung", "url": "https://github.com/treylom" },
-  "homepage": "https://github.com/treylom/tofable",
-  "repository": "https://github.com/treylom/tofable",
+  "homepage": "https://github.com/treylom/tofu-harness",
+  "repository": "https://github.com/treylom/tofu-harness",
   "license": "MIT"
 }

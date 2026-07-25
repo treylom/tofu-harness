@@ -1,12 +1,12 @@
 {
-  "name": "tofable-kit",
-  "version": "0.1.0",
-  "description": "The tofable working discipline as an invocable skill: honest decomposition, prompt refinement with /prompt integration and fallback, evidence-first execution, honest completion.",
+  "name": "tofu-harness",
+  "version": "0.2.0",
+  "description": "Harness discipline for AI agents: the tofable working discipline (/tofable) plus /harness-audit — a deadline-bounded census-verify-repair pass for your harness documents.",
   "author": { "name": "tofukyung" },
   "skills": "./skills/",
   "interface": {
-    "displayName": "tofable-kit",
-    "shortDescription": "tofable working discipline as an invocable skill",
+    "displayName": "tofu-harness",
+    "shortDescription": "tofable working discipline + harness-audit as invocable skills",
     "developerName": "tofukyung",
     "category": "Developer Tools",
     "capabilities": ["Interactive"]
