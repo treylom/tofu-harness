@@ -5,7 +5,7 @@
 
 Trigger: the moment you start (or dispatch) any image generation, editing, labeling, or diagram task.
 
-> Why (summary): On 2026-06-08, a "text-only change" (= an edit) was dispatched to a generator instead, causing full recomposition plus a PIL font-overlay tone mismatch — about 3 hours of churn (root cause: edit/generate confusion). Why #2: on 2026-07-09, a real person's face (▶ Fill in: your own reference-image example) was generated from imagination → had to be corrected twice (root cause: not following reference-first). See [feedback_image_edit_vs_generate_imagen_input.md](feedback_image_edit_vs_generate_imagen_input.md) · [feedback_image_reference_first_no_imagination.md](feedback_image_reference_first_no_imagination.md). Full history: git log.
+> Why (summary): On 2026-06-08, a "text-only change" (= an edit) was dispatched to a generator instead, causing full recomposition plus a PIL font-overlay tone mismatch — about 3 hours of churn (root cause: edit/generate confusion). Why #2: on 2026-07-09, a real person's face (▶ Fill in: your own reference-image example) was generated from imagination → had to be corrected twice (root cause: not following reference-first). See your incident-log entry on edit-vs-generate routing · your incident-log entry on reference-first policy. Full history: git log.
 > 2026-07-31 diet edit (by the orchestrator bot): narrative compressed; decision tree, gates, and forbidden paths fully preserved.
 
 ## 1. Decision tree (what's the goal?)

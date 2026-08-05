@@ -216,7 +216,9 @@ do not operate at all until their markers are filled: an unfilled completion-thr
 the gate silently never fires. Treat the marker list as an installation checklist, not as
 optional annotations.
 
-Current marker counts per file (grep `▶ Fill in` to regenerate):
-code-quality 18 · discord-comms 8 · skill-process 7 · autonomy 6 · image-ops 5 ·
-maintenance 5 · meeting-protocol 5 · orchestration 4 · search-usage 4 · voice 3 ·
-source-fact 2 · porting-infra 1 — total 68.
+Current marker counts per file (unit: markers, not lines — regenerate with
+`grep -o '▶ Fill in' rules/<file>.md | wc -l`; plain `grep -c` counts lines and
+undercounts when one line carries two markers):
+code-quality 20 · discord-comms 11 · skill-process 8 · autonomy 7 · image-ops 5 ·
+maintenance 5 · meeting-protocol 5 · orchestration 5 · search-usage 4 · voice 3 ·
+source-fact 3 · porting-infra 1 — total 77.
