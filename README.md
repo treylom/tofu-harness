@@ -203,3 +203,20 @@ Thank you — this repo would be thinner without each of you.
 ## License
 
 This repository's own contributions are licensed under the [MIT License](LICENSE). The hook design under `hooks/` is adapted from `fable-ish-codex` (Apache-2.0, Copyright Pandoll-AI); see [NOTICE](NOTICE) for the required attribution.
+
+## Fill-in markers (`▶ Fill in:`)
+
+The rule files in `rules/` are generalized from a working internal setup. Everywhere a rule
+depends on a value specific to YOUR deployment — a channel/thread id, a tool or script path,
+a persona name, a search endpoint — the value is replaced with a `▶ Fill in:` marker.
+
+**A rule whose marker is left blank is not a weaker rule — it is an inactive one.** In
+particular, gates marked CRITICAL (e.g. the completion-report gate in `rules/autonomy.md` §2)
+do not operate at all until their markers are filled: an unfilled completion-thread id means
+the gate silently never fires. Treat the marker list as an installation checklist, not as
+optional annotations.
+
+Current marker counts per file (grep `▶ Fill in` to regenerate):
+code-quality 18 · discord-comms 8 · skill-process 7 · autonomy 6 · image-ops 5 ·
+maintenance 5 · meeting-protocol 5 · orchestration 4 · search-usage 4 · voice 3 ·
+source-fact 2 · porting-infra 1 — total 68.
