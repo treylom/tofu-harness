@@ -283,6 +283,35 @@ session entering via SessionStart.
   being asked. ▶ Fill in: a pointer to your own planning doc, item G4, if
   you track this as an open item.
 
+### 3.7 Wake-escalation ladder = opt-in, with a pinned-review gate (added 2026-08-12)
+
+If your watchdog escalates beyond notifications (tmux wake keystrokes,
+process restarts), the ladder must be **opt-in per meeting manifest**
+(`escalation_enabled`), and the restart rung must be a **separate opt-in**
+(`restart_enabled`) that stays locked fleet-wide until a safety-receipt
+design (write-ahead pending record, restart success ≠ spawn success,
+listener-readiness evidence) has passed its own review. Absence-based
+safety ("no restart script configured") is weaker than design-based
+locking — promote to the latter.
+
+- **Before enabling escalation, three checks**: (a) reviewed revision ==
+  running revision — `git diff --quiet HEAD -- <watchdog>` clean AND the
+  file's SHA-256 matches the approved-SHA record (this bundle's
+  convention: `<state-dir>/gate-b-approved-sha`, line 1 = hex SHA,
+  `#` lines = metadata); (b) a live pre-flight dry-run measuring how many
+  bots would be judged idle at that moment; (c) confirm the restart rung
+  is still locked. After enabling, re-run the identity check once.
+- **Watchdog repair process**: pin a review-candidate **commit SHA** and
+  judge that revision only (never a moving worktree); the verdict ruler is
+  **`[FAIL]` tags 0 + exit 0 + planted decoys 0** — never PASS counts
+  (three reviewers counting "PASS" produced three different numbers);
+  verification slot 0 = **wiring proof** (a defined-but-never-called
+  ladder passes every unit test and does nothing).
+- A runtime guard in the watchdog itself should compare its own SHA to the
+  approved-SHA record before processing any escalation-enabled manifest —
+  on mismatch: skip the ladder, log one line, keep the notification tier
+  running. (Enforcement-layer; the record file alone is bookkeeping.)
+
 ## 4. Enforce one timezone (every bot, every timestamp)
 
 - **All timestamps in logs, notes, and scheduling decisions use one fixed
