@@ -220,5 +220,5 @@ Current marker counts per file (unit: markers, not lines — regenerate with
 `grep -o '▶ Fill in' rules/<file>.md | wc -l`; plain `grep -c` counts lines and
 undercounts when one line carries two markers):
 code-quality 20 · discord-comms 11 · skill-process 8 · autonomy 7 · image-ops 5 ·
-maintenance 5 · meeting-protocol 5 · orchestration 5 · search-usage 4 · voice 3 ·
-source-fact 3 · porting-infra 1 — total 77.
+maintenance 5 · meeting-protocol 5 · orchestration 5 · search-usage 5 · voice 3 ·
+source-fact 3 · porting-infra 1 — total 78.
