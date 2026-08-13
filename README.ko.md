@@ -20,7 +20,7 @@
 | 이런 분이라면 | 이렇게 |
 |---|---|
 | **새 모델이 나왔고** 내 하네스가 낡았을 수 있다 | [`/harness-audit`](skills/harness-audit/SKILL.md) 를 마감선 걸고 실행 |
-| **Claude Code** 에서 검증 게이트를 쓰고 싶다 | [`hooks/`](hooks/) 복사 → [단계별 설치](hooks/README.md) (~5분) → [`rules/`](rules/) 에서 규칙 층 시드 |
+| **Claude Code** 에서 검증 게이트를 쓰고 싶다 | **에이전트에게 그냥 _"프로젝트 관련 훅 설치해줘"_** → [`/install-hooks`](skills/install-hooks/SKILL.md) 가 맞는 것만 골라 배선하고, **각 게이트를 실제로 발동시켜 본 뒤에야** 완료를 보고한다(파일 복사 = 설치 ❌). 수동이 편하면 [단계별 설치](hooks/README.md) (~5분). 어느 쪽이든 [`rules/`](rules/) 에서 규칙 층 시드 |
 | **Codex** 사용자다 | upstream 플러그인 [`fable-ish-codex`](https://github.com/Pandoll-AI/fable-ish-codex) 설치 — [`codex/README.md`](codex/README.md) |
 | 하네스가 일하는 방식을 **정말 이전시키는지 재보고** 싶다 | [`bench/`](bench/) 를 내 모델에 실행 — 결과·방법은 [`bench/results.md`](bench/results.md) |
 

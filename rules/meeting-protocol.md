@@ -51,6 +51,37 @@ session entering via SessionStart.
   your own precedent doc for a cross-check matrix format, if you keep one.
 - New meeting = `<your meetings root>/<date>-<topic>/` with 4 files:
   `00-context` (immutable) / `01-spec` / `02-progress` (LIVE) / `03-outcome`.
+- **🚨 `01-spec` must carry three named sections — pass criteria, evaluation
+  principles, stop conditions (operator instruction, 2026-08-13).** A spec
+  missing any of the three is incomplete.
+  - **Pass criteria**: what must be true to call it done, written as a
+    checkable sentence. "It works well" ❌ / "given X, the output is Y" ✅.
+  - **Evaluation principles**: what separates good from bad — including the
+    priority order when two axes conflict (e.g. correctness > speed).
+  - **Stop conditions**: when to halt. Write **both** the finish condition
+    **and** the give-up / defer condition. With only one of them, the loop
+    never closes.
+  - **Why these three**: when a planning tool distills a spec, these are the
+    fields that decide judgment, and they are the first ones dropped when a
+    human or bot rewrites the plan as a summary. Goal and background survive
+    the rewrite; the pass line does not, because everyone believes they
+    already know it.
+  - **Measured basis (2026-08-13, all 26 `01-spec` files in one vault)**:
+    pass criteria present in **9/26 (35%)**, evaluation principles **0/26
+    (0%)**, stop conditions **1/26 (4%)**. The assumption "our own project
+    docs already have these" was tested and **disproved** — two of the three
+    were effectively absent.
+  - **Regression that motivated it**: on 2026-08-13 two bots each recorded
+    the same unfinished verification as "not performed" and handed it on.
+    With no stop condition in the spec, "who, by when" stays blank, and a
+    limit written down twice is not a limit — it is **work nobody owns**.
+  - **If the plan came from a seed-generating tool**: keep the seed summary
+    as a note in the same meeting folder and link it from `01-spec` by
+    **wikilink on the document name**, not by path (same reasoning as the
+    stable-folder-name rule). Verify the tool actually persists its seed
+    originals before relying on them — in the measured case only **2 of 10**
+    referenced seed originals still existed on disk, so the in-repo note was
+    the only durable copy.
 - **`03-outcome` follow-up actions must be checkboxes (`- [ ]`)** — a prose
   action item is not picked up by an automated action collector (this
   bundle's example collector script: `self-improve-agenda.py`, requirement

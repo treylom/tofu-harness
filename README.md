@@ -20,7 +20,7 @@ Plugin packaging is **skill-only**. The gates under [`hooks/`](hooks/) install s
 | You are… | Do this |
 |---|---|
 | here because **a new model just shipped** and your harness may be stale | run [`/harness-audit`](skills/harness-audit/SKILL.md) with a deadline |
-| on **Claude Code**, want the verification gates | copy [`hooks/`](hooks/), follow the [step-by-step install](hooks/README.md) (~5 min), seed rules from [`rules/`](rules/) |
+| on **Claude Code**, want the verification gates | **just ask your agent: _"install the project hooks"_** → [`/install-hooks`](skills/install-hooks/SKILL.md) picks what fits, wires it, and **proves each gate fires** before reporting done. Prefer the manual path? [step-by-step install](hooks/README.md) (~5 min). Either way, seed rules from [`rules/`](rules/) |
 | on **Codex** | install the upstream plugin [`fable-ish-codex`](https://github.com/Pandoll-AI/fable-ish-codex) — see [`codex/README.md`](codex/README.md) |
 | here to **measure** whether a harness transfers a working style | run [`bench/`](bench/) against your own model; results and method in [`bench/results.md`](bench/results.md) |
 
