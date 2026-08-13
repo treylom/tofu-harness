@@ -23,18 +23,36 @@ If the settings file does not exist, create it — but say so explicitly, becaus
 
 Do not install everything by default. Ask what the project actually needs, or infer it and state the inference.
 
-| Hook | Event | Install when |
+**Install in groups, not all at once.** The groups below are the same three names [`harness-setup`](../harness-setup/SKILL.md) uses — if you change one list, change both, or a profile will mean two different things depending on which skill ran.
+
+| Group | Hooks | Pick this when |
 |---|---|---|
-| `fable_lib.py` | (library) | **Always** — the others import it |
-| `verify-ledger.py` | `PostToolUse(Write\|Edit\|Bash)` | **Always** — records evidence, never blocks, fail-open |
-| `stop-verify-gate.py` | `Stop` | **Default yes** — change-verification, absence-claim, claim-evidence |
-| `continuation-gate.py` | `Stop` | Work gets deferred/abandoned mid-task |
-| `surfacing-gate.py` | `PreToolUse` | Risky operations need to be surfaced before running |
-| `cutover-review-gate.py` | `Stop` | Opt-in — migrations/cutovers |
-| `requirements-lock.py` | `Stop` | Opt-in — scope creep is the failure mode |
-| `branch-stray-guard.sh` | `PreToolUse` | Opt-in — commits land on the wrong branch |
+| **`core`** | `fable_lib` + `verify-ledger` + `stop-verify-gate` | First install, or a shared repo where one false positive would be expensive |
+| **`recommended`** | `core` + `continuation-gate` + `surfacing-gate` + `blind-retry-gate` + `prompt-advance-gate` | Your daily project — **start here if unsure** |
+| **`full`** | `recommended` + every gate marked *opt-in* below | You already know which gates you want and accept the tuning cost |
+
+The split is not invented here: **`recommended` is exactly the gates [`hooks/README.md`](../../hooks/README.md) does *not* mark opt-in, and `full` adds the ones it does.** That file is the inventory of record — if a gate is added there, it lands in `full` by default, and this table is stale until updated.
+
+| Hook | Event | Group | Installs when the failure mode is… |
+|---|---|---|---|
+| `fable_lib.py` | (library) | core | **Always** — the others import it by name |
+| `verify-ledger.py` | `PostToolUse(Write\|Edit\|Bash)` | core | **Always** — records evidence, never blocks, fail-open |
+| `stop-verify-gate.py` | `Stop` | core | Claims outrun evidence (change-verification, absence-claim, claim-evidence) |
+| `continuation-gate.py` | `Stop` | recommended | Work gets deferred or abandoned mid-task |
+| `surfacing-gate.py` | `PreToolUse` | recommended | Risky operations run without being surfaced first |
+| `blind-retry-gate.py` | `PreToolUse` | recommended | A failed command gets re-run byte-identical instead of diagnosed |
+| `prompt-advance-gate.py` | `PreToolUse` | recommended | Execution starts straight after an interview/plan, with no spec pass between (Claude Code only — no Codex port yet) |
+| `cutover-review-gate.py` | `Stop` | full *(opt-in)* | Cutovers/deploys get declared complete with no reviewer verdict |
+| `requirements-lock.py` | `Stop` | full *(opt-in)* | Completion bias — a feature gets deleted to silence its error |
+| `branch-stray-guard.sh` | `Stop` | full *(opt-in)* | Auto-committed notes land on a non-default branch and vanish |
+| `skill-step-gate.py` | `Stop` | full *(opt-in)* | A skill is invoked but its required steps are skipped |
+| `skill-step-inject.py` | `PostToolUse(Skill)` | full *(opt-in)* | Same as above, prevented at invoke time — pairs with `skill-step-gate` |
+
+> `hooks/block-text-overlay.sh` ships in the directory but is **not** in any group and is not in `hooks/README.md`'s table — it is a domain-specific guard (image/text-overlay work), not part of the general bundle. Install it deliberately or not at all.
 
 **Whatever you skip, list it.** A silent subset reads as full coverage — that is the same defect this bundle exists to catch.
+
+**Adding a group later is normal and expected.** Start at `core`, run it for a few days, then add `recommended`. Re-running this skill for the added hooks only is correct; re-wiring hooks that already work is how a working install breaks.
 
 ## STEP 2 — Place the files where they survive
 

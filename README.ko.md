@@ -17,26 +17,78 @@
 
 ## 여기서 시작
 
-| 이런 분이라면 | 이렇게 |
-|---|---|
-| **새 모델이 나왔고** 내 하네스가 낡았을 수 있다 | [`/harness-audit`](skills/harness-audit/SKILL.md) 를 마감선 걸고 실행 |
-| **Claude Code** 에서 검증 게이트를 쓰고 싶다 | **에이전트에게 그냥 _"프로젝트 관련 훅 설치해줘"_** → [`/install-hooks`](skills/install-hooks/SKILL.md) 가 맞는 것만 골라 배선하고, **각 게이트를 실제로 발동시켜 본 뒤에야** 완료를 보고한다(파일 복사 = 설치 ❌). 수동이 편하면 [단계별 설치](hooks/README.md) (~5분). 어느 쪽이든 [`rules/`](rules/) 에서 규칙 층 시드 |
-| **Codex** 사용자다 | upstream 플러그인 [`fable-ish-codex`](https://github.com/Pandoll-AI/fable-ish-codex) 설치 — [`codex/README.md`](codex/README.md) |
-| 하네스가 일하는 방식을 **정말 이전시키는지 재보고** 싶다 | [`bench/`](bench/) 를 내 모델에 실행 — 결과·방법은 [`bench/results.md`](bench/results.md) |
-
-### 설치
+**짧게 말하면: 플러그인 설치하고, 에이전트에게 _"하네스 설치해줘"_ 라고 하면 된다.** 그러면 [`/harness-setup`](skills/harness-setup/SKILL.md) 이 순서대로 전부 깔고, **각 조각이 실제로 동작하는 걸 확인한 뒤에야** 완료라고 말한다. 이 README 에서 딱 한 줄만 읽는다면 이 줄이다.
 
 ```
 claude plugin marketplace add treylom/tofu-harness
 /plugin install tofu-harness@tofu-harness
 ```
 
-나중에 갱신할 때:
+그 다음 에이전트에게: **`하네스 설치해줘`** — 아니면 [`/harness-help`](skills/harness-help/SKILL.md) 로 지금 뭐가 깔려 있는지부터 보면 된다.
+
+| 이런 분이라면 | 이렇게 |
+|---|---|
+| **처음이고** 통째로 돌아가게 하고 싶다 | **"하네스 설치해줘"** → [`/harness-setup`](skills/harness-setup/SKILL.md), 프로필 `recommended` |
+| **뭐가 이미 깔려 있는지** 모르겠다 | [`/harness-help`](skills/harness-help/SKILL.md) — 내 기계를 실측해서 **다음 한 걸음**을 짚어준다 |
+| **새 모델이 나왔고** 내 하네스가 낡았을 수 있다 | [`/harness-audit`](skills/harness-audit/SKILL.md) 를 마감선 걸고 실행 |
+| **Claude Code** 에서 검증 게이트만 쓰고 싶다 | **"프로젝트 관련 훅 설치해줘"** → [`/install-hooks`](skills/install-hooks/SKILL.md). 수동이 편하면 [단계별 설치](hooks/README.md) (~5분) |
+| **Codex** 사용자다 | upstream 플러그인 [`fable-ish-codex`](https://github.com/Pandoll-AI/fable-ish-codex) 설치 — [`codex/README.md`](codex/README.md) |
+| 하네스가 일하는 방식을 **정말 이전시키는지 재보고** 싶다 | [`bench/`](bench/) 를 내 모델에 실행 — 결과·방법은 [`bench/results.md`](bench/results.md) |
+
+### 명령 다섯 개
+
+| 명령 | 언제 쓰나 | 뭐가 돌아오나 |
+|---|---|---|
+| [`/harness-setup`](skills/harness-setup/SKILL.md) | 처음 설치, 또는 나중에 하나 추가 | 의존 순서대로 설치 + 조각마다 동작 증명 |
+| [`/harness-help`](skills/harness-help/SKILL.md) | "뭐 있지? 뭐부터 하지?" | 실측 목록 + **다음 한 걸음 하나** |
+| [`/install-hooks`](skills/install-hooks/SKILL.md) | 게이트만 원할 때 | 배선 + **일부러 발동시켜 본 증거** |
+| [`/harness-audit`](skills/harness-audit/SKILL.md) | 모델 출시 직후, 또는 분기마다 | 어긋난 곳 탐지 → 독립 재검증 → 확인된 것만 수리 |
+| [`/tofable`](skills/tofable/SKILL.md) | 비자명한 작업을 시작할 때 | 그 작업을 규율대로 수행 |
+
+### 한꺼번에 말고 나눠서 깔 것
+
+게이트는 의견이 있는 도구다. 요청하지도 않은 게이트가 첫날 오탐 한 번 내면 대개 그 게이트만이 아니라 **묶음 전체**가 꺼진다 — 그러니 적게 깔고 켜 둔 채로 유지하는 편이 낫다. 세 그룹이고, 정의는 [`/install-hooks`](skills/install-hooks/SKILL.md) 한 곳에만 있다:
+
+| 그룹 | 들어가는 것 | 이럴 때 |
+|---|---|---|
+| `core` | 근거 원장 + 정지 게이트 | 공용 레포거나, 조심스럽게 가고 싶다 |
+| `recommended` | `core` + 이어가기·표면화·맹목재시도·스펙선행 | 매일 쓰는 내 프로젝트 — **대부분 이걸 원한다** |
+| `full` | `recommended` + 선택 게이트 전부 | 어느 게 필요한지 이미 안다 |
+
+`core` 로 며칠 돌린 뒤 `recommended` 를 얹는 순서를 권한다. **나중에 그룹을 추가하는 건 정상 경로다.**
+
+### 각 조각이 실제로 막는 것
+
+"무슨 기능이 붙는다"가 아니라 **"어떤 실패를 막는다"**로 읽어야 한다:
+
+| 조각 | 막는 실패 | 체감 |
+|---|---|---|
+| `verify-ledger` | 근거 없는 주장 | 없음 — 기록만 하고 막지 않는다 |
+| `stop-verify-gate` | 아무것도 안 돌려보고 "완료·수정·검증됨" | 턴이 끝나기 전에 **실행 결과를 요구받는다** |
+| `continuation-gate` | 작업이 조용히 중도 폐기됨 | 미루려면 **막힌 지점과 결정 주체**를 대야 한다 |
+| `surfacing-gate` | 위험한 작업이 말없이 실행됨 | 파괴적 명령이 **실행 전에** 표면화된다 |
+| `blind-retry-gate` | 실패한 명령을 그대로 다시 실행 | 원인이나 탐침을 요구하는 1회 반려 |
+| `prompt-advance-gate` | 인터뷰 직후 스펙 없이 바로 구현 | 요구를 스펙으로 바꾸라는 1회 반려 |
+| [`rules/`](rules/) | 어제의 규율이 조용히 만료됨 | 상기가 아니라 **트리거 지점에서** 행동이 바뀐다 |
+
+### 기대효과 — 솔직하게
+
+**확실히 얻는 것**: 완료 주장이 근거보다 앞서가는 일이 줄고, **실패의 «모양»이 바뀐다.** 게이트가 에이전트를 똑똑하게 만들지는 않는다. **조용한 실패를 시끄럽게** 만든다. 자신만만한 말투의 틀린 답이 "실행 결과를 보여달라"는 반려로 바뀐다.
+
+**드는 비용**: 게이트마다 오탐률이 0보다 크다. 그룹을 나눈 이유가 그거고, 설치할 때마다 `FABLE_GATE_OFF=1` 을 같이 찍는 이유도 그거다. 조율은 실제 작업이고, **넓히기 전에 `core` 에서** 하는 게 맞다.
+
+**아래 벤치마크 숫자에 대해**: **이전 세대 모델**에서 잰 값이다. 더 강한 모델은 이런 교정이 덜 필요하므로, 방향이 유지되더라도 **효과 크기는 줄어든다**고 봐야 한다. "방법이 작동한다"는 증거로 읽되, **내 환경에서 나올 숫자로 읽지 말 것.** [`bench/`](bench/) 로 직접 재면 된다.
+
+**이것만은 선택이 아니다**: 규칙 파일에는 배포 환경마다 다른 값을 넣을 `▶ Fill in:` 자리가 있다. **자리가 빈 규칙은 «약한 규칙»이 아니라 «꺼진 규칙»**이고, 조용히 실패한다 — 오류도 로그도 없이 그냥 한 번도 안 걸린다. `/harness-setup` 과 `/harness-help` 가 개수를 세어 준다.
+
+### 나중에 갱신할 때
 
 ```
 claude plugin marketplace update tofu-harness
 claude plugin update tofu-harness@tofu-harness
 ```
+
+갱신 후에는 [`/harness-help`](skills/harness-help/SKILL.md) 를 한 번 돌릴 것 — 갱신이 **내 설정에는 아직 배선되지 않은 게이트**를 새로 들여올 수 있다.
 
 ---
 

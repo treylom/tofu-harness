@@ -1,7 +1,7 @@
 {
   "name": "tofu-harness",
-  "description": "Harness discipline for AI agents: the tofable working discipline as an invocable skill (/tofable) plus /harness-audit — a deadline-bounded census-verify-repair pass that checks your harness documents (CLAUDE.md / AGENTS.md / SKILL.md / rules) against a new model's principles. Skill-only packaging — the verification gates under hooks/ install separately (see hooks/README.md).",
-  "version": "0.2.0",
+  "description": "Harness discipline for AI agents. Say \"set up the harness\" to run /harness-setup — installs the stack in dependency order and proves each piece is live. /harness-help reports what you actually have and one next step. /install-hooks wires the verification gates in groups (core / recommended / full) and makes each one fire before reporting done. /harness-audit is a deadline-bounded census-verify-repair pass over your harness documents (CLAUDE.md / AGENTS.md / SKILL.md / rules) after a model release. /tofable runs a task under the working discipline. Skill-only packaging — the gates under hooks/ install separately (see hooks/README.md).",
+  "version": "0.3.0",
   "author": { "name": "tofukyung", "url": "https://github.com/treylom" },
   "homepage": "https://github.com/treylom/tofu-harness",
   "repository": "https://github.com/treylom/tofu-harness",

@@ -17,26 +17,78 @@ Plugin packaging is **skill-only**. The gates under [`hooks/`](hooks/) install s
 
 ## Start here
 
-| You are… | Do this |
-|---|---|
-| here because **a new model just shipped** and your harness may be stale | run [`/harness-audit`](skills/harness-audit/SKILL.md) with a deadline |
-| on **Claude Code**, want the verification gates | **just ask your agent: _"install the project hooks"_** → [`/install-hooks`](skills/install-hooks/SKILL.md) picks what fits, wires it, and **proves each gate fires** before reporting done. Prefer the manual path? [step-by-step install](hooks/README.md) (~5 min). Either way, seed rules from [`rules/`](rules/) |
-| on **Codex** | install the upstream plugin [`fable-ish-codex`](https://github.com/Pandoll-AI/fable-ish-codex) — see [`codex/README.md`](codex/README.md) |
-| here to **measure** whether a harness transfers a working style | run [`bench/`](bench/) against your own model; results and method in [`bench/results.md`](bench/results.md) |
-
-### Install
+**The short version: install the plugin, then say _"set up the harness"_ to your agent.** That runs [`/harness-setup`](skills/harness-setup/SKILL.md), which does the whole sequence in order and proves each piece works before claiming it. If you only ever read one line of this README, that's the line.
 
 ```
 claude plugin marketplace add treylom/tofu-harness
 /plugin install tofu-harness@tofu-harness
 ```
 
-Updating later:
+Then, in your agent: **`set up the harness`** — or run [`/harness-help`](skills/harness-help/SKILL.md) first to see what you already have.
+
+| You are… | Do this |
+|---|---|
+| **new here** and want the whole thing working | say **"set up the harness"** → [`/harness-setup`](skills/harness-setup/SKILL.md), profile `recommended` |
+| not sure **what's already installed** | run [`/harness-help`](skills/harness-help/SKILL.md) — it measures your machine and names one next step |
+| here because **a new model just shipped** and your harness may be stale | run [`/harness-audit`](skills/harness-audit/SKILL.md) with a deadline |
+| on **Claude Code**, want only the verification gates | say **"install the project hooks"** → [`/install-hooks`](skills/install-hooks/SKILL.md). Prefer doing it by hand? [step-by-step install](hooks/README.md) (~5 min) |
+| on **Codex** | install the upstream plugin [`fable-ish-codex`](https://github.com/Pandoll-AI/fable-ish-codex) — see [`codex/README.md`](codex/README.md) |
+| here to **measure** whether a harness transfers a working style | run [`bench/`](bench/) against your own model; method and results in [`bench/results.md`](bench/results.md) |
+
+### The five commands
+
+| Command | Use it when | What you get back |
+|---|---|---|
+| [`/harness-setup`](skills/harness-setup/SKILL.md) | First time, or adding a piece later | The stack installed in dependency order, each piece proved |
+| [`/harness-help`](skills/harness-help/SKILL.md) | "What do I have? What now?" | Measured inventory + exactly one next step |
+| [`/install-hooks`](skills/install-hooks/SKILL.md) | You want the gates specifically | Gates wired **and made to fire on purpose** |
+| [`/harness-audit`](skills/harness-audit/SKILL.md) | After a model release, or quarterly | Drift found, independently re-verified, only confirmed items repaired |
+| [`/tofable`](skills/tofable/SKILL.md) | Starting any non-trivial task | That task run under the working discipline |
+
+### Install in stages, not all at once
+
+Gates are opinionated. An unrequested one that false-positives on day one usually gets the **whole bundle** switched off, not just itself — so ship less and keep it on. Three groups, defined once in [`/install-hooks`](skills/install-hooks/SKILL.md):
+
+| Group | You get | Start here if… |
+|---|---|---|
+| `core` | evidence ledger + the stop gate | It's a shared repo, or you're cautious |
+| `recommended` | `core` + continuation, surfacing, blind-retry, prompt-advance | It's your daily project — **most people want this** |
+| `full` | `recommended` + the opt-in gates | You already know which ones you want |
+
+Run `core` for a few days, then add `recommended`. Adding a group later is a normal, supported move.
+
+### What each piece is actually for
+
+Read this as "the failure it prevents", not "the feature it adds":
+
+| Piece | Prevents | You'll notice |
+|---|---|---|
+| `verify-ledger` | Claims with nothing behind them | Nothing — it records, it never blocks |
+| `stop-verify-gate` | "Done / fixed / verified" with nothing actually run | You get asked for the output before the turn ends |
+| `continuation-gate` | Work quietly abandoned mid-task | Deferring makes you name the blocker and whose call it is |
+| `surfacing-gate` | Risky operations running unannounced | Destructive commands surface *before* they run |
+| `blind-retry-gate` | The same failed command re-run unchanged | One bounce asking for a cause or a probe |
+| `prompt-advance-gate` | Building straight after an interview, no spec between | One bounce to turn the requirement into a spec |
+| [`rules/`](rules/) | Yesterday's discipline silently expiring | Behavior changes at the trigger, not from a reminder |
+
+### What to expect — honestly
+
+**What this reliably buys you:** completion claims stop outrunning evidence, and the failure mode changes shape. The gates don't make an agent smarter; they make the *silent* failures loud. A wrong answer with a confident tone becomes a bounce asking for the command output.
+
+**What it costs:** each gate has a false-positive rate above zero. That's why the groups exist and why `FABLE_GATE_OFF=1` is printed on every install — the tuning is real work, and you should do it on `core` before widening.
+
+**On the benchmark numbers below:** they were measured on an **earlier model generation**. A stronger model needs fewer of these corrections, so expect the *size* of the effect to shrink even where the direction holds. Treat them as evidence the method works — not as a number to expect on your setup. Measure your own with [`bench/`](bench/).
+
+**One thing that is not optional:** rule files ship with `▶ Fill in:` markers for values specific to your deployment. **A rule with an unfilled marker is not a weaker rule — it is an inactive one**, and it fails silently: no error, no log line, just a gate that has never once fired. `/harness-setup` and `/harness-help` both count them for you.
+
+### Updating later
 
 ```
 claude plugin marketplace update tofu-harness
 claude plugin update tofu-harness@tofu-harness
 ```
+
+After any update, run [`/harness-help`](skills/harness-help/SKILL.md) — an update can add a gate your settings don't wire yet.
 
 ---
 
