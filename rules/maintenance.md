@@ -34,6 +34,11 @@ Triggers: right after a model's major release · 90 days (one quarter) since the
    - A more durable fix (not yet rolled out, pending a scope review) is giving important rule-enforcing skills a **plugin namespace** (`plugin:skill` — documented as immune to cross-layer collision; e.g. `km:`, `ouroboros:`-style prefixes). Treat as case-by-case, re-judge per situation, operator's final call (see [skill-process](skill-process.md) §6).
    - 📦 **When you port this checklist item into a downstream rule bundle, don't merge it into one file** — the *prevention* half (check for a same name before creating a new skill) and the *detection* half (this periodic sweep) fire at opposite times (creation time vs. quarterly), so putting only one of them in your bundle leaves a gap either right up until the next review, or for anything created before you started checking.
 
+7. **Core→full-text pointer traversal (relational check)**: verify that every full-text rule file referenced by a core rule file actually exists, by traversing the pointers — never by comparing against a hardcoded count ("18/18"), which goes stale in both directions as files are added or removed. The only question: "does everything the core points at exist?"
+   - Check: `for c in rules/*.md; do for t in $(grep -o 'rules-full/[a-z-]*\.md' "$c" | sort -u); do [ -f "$t" ] || echo "MISSING: $c -> $t"; done; done` (adjust glob/paths to the repo's actual layout — verify the pattern matches at least one real pointer before trusting a zero).
+   - **Absent decoy required**: run the same expression against one pointer known not to exist and confirm MISSING fires — a zero output must be provable as "no gaps", not "check never ran".
+   - The failure class concentrates in derived machines (stale clones, stash conflicts, partial checkouts), not the primary — check this axis first on secondary machines and deployments.
+
 ## 2. Cadence · Ownership · Log
 - **Cadence**: once after every model major release, plus once per quarter (90 days from the last review date).
 - **Who runs it**: the orchestrator role owns running the check. **Registering it as a recurring cron job is delegated to whichever role/bot owns your scheduling domain** (see [orchestration](orchestration.md) §3 and [meeting-protocol](meeting-protocol.md) §5 for how that handoff is coordinated).
