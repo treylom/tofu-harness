@@ -97,6 +97,11 @@ session entering via SessionStart.
     simultaneous appends and degrades liveness precision. Write a timestamp
     only from a fresh clock read — never from memory or assumed continuity
     (a writing-domain bot caught itself doing this on 2026-08-01).
+  - **Ask first: "does this timestamp change the meaning?" (2026-09-01)**: if
+    removing the time changes nothing ("collected the results", "sent — id
+    attached"), omit it entirely — most placeholder/hand-typed-time defects
+    occurred in slots nobody needed. "Measure it" adds burden and gets skipped;
+    "drop it" removes burden and sticks.
   - **🚨 Append method and integrity contract (label: R3 — approved
     2026-08-01)**: ① Do not append with a shell `echo` that performs escape
     interpretation — it can inject real bytes (a literal `\000`/NUL byte, or
