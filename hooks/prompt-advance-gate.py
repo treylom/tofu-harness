@@ -57,7 +57,7 @@ MIN_DISPATCH_CHARS = 300
 # Meeting-SoT engagement — matches the tool-call JSON for reads/edits of a
 # meeting 02-progress file anywhere in the tail (order-independent: bots read
 # the meeting SoT before or after the crystallizing marker).
-MEETING_SOT_RE = re.compile(r"meetings/[^\"'\s]{0,160}02-progress\.md", re.IGNORECASE)
+MEETING_SOT_RE = re.compile(r"(meetings|100-project)/[^\"'\s]{0,160}02-progress\.md", re.IGNORECASE)
 
 # Requirement-crystallizing phase happened. Invoke-shaped evidence only:
 # loose substrings ("skill...interview") over-fire on injected rule/prose
