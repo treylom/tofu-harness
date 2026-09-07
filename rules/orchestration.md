@@ -4,6 +4,8 @@ Trigger: delegating work to another bot, convening a meeting, waiting on a compl
 
 > Diet note (2026-07-31): incident narrative compressed; every clause, caveat, and forbidden path preserved in full. Original wording lives in version-control history.
 
+- Worker recovery has two layers: the harness registry (clear with TaskStop <name>) and the OS process/pane (reap script). Reap alone leaves the teammate listed; TaskStop alone may leave a pane. Order = TaskStop → reap. A tool-restricted worker may write exactly one designated report file (e.g. /tmp/k-<name>.md) even when it has no Write tool.
+
 ## 1. Bot identity = verify, never guess
 - Bot-identity source of truth = the `<bot>` name a session-start hook injects as `=== [<bot>] soul.md ===` (derived from `▶ Fill in: your bot-identity env var, e.g. DISCORD_STATE_DIR / ~/.claude/channels/discord-<bot>`). Any shared/root config's bot-specific working-directory metadata is only that bot's own identity when `<bot>` matches it — if it doesn't match, ignore that block.
 - Before delegating to or waiting on a teammate bot, the orchestrator must **verify the target bot's actual session state** (tmux list/capture, source-fact check). Assuming "it's probably still working" and passively waiting counts as dereliction of duty (regression logged 2026-05-16).
