@@ -28,7 +28,7 @@ Trigger: starting a build/design task ("let's build X"), a bug/debugging task, o
 - **(iii) Mechanized layer — not adopted**: a watchdog that detects N round-trips plus an unchanged goal sentence was **not adopted** (operator, 2026-08-02: "proceed only through gate (ii)").
 - Case-specific basis, room for situational re-judgment, operator has final say (§6). Subject to sync across your deployed harness copies — see [porting-infra](porting-infra.md). (Source discussion dated 2026-07-30; see your incident log.)
 
-## 1.9 Pre-check before starting a provisionally assigned ledger row (2026-09-09)
+## 1.9 Pre-check before starting a provisionally assigned ledger row (operator, 2026-09-09 -- distinguish rows already reflected in code/rules/skills/config from rows only quoted in a note or log)
 Before starting a ledger row that was provisionally assigned or handed over, run the pre-check script once for that owner. For any row it flags as a possible match, open the diff of the matching commit and judge whether the work was actually reflected in code, rules, skills, or config files, or merely quoted in a meeting note, log, or mirror copy. If it was reflected, close the row with a one-line receipt pointing to the exact file and line (or commit hash). If it was only quoted, leave the row's status unchanged and add a note explaining it was a false match. Only rows the script does not flag should be started as new work. The bot starting the row is responsible for writing the receipt or note directly on that row; the script's own exclusion list for quoted sources is the reference to follow, not a copy kept in this document.
 (vault docs/rules-full/skill-process.md, 2026-09-09)
 
