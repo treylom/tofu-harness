@@ -28,6 +28,13 @@ Trigger: starting a build/design task ("let's build X"), a bug/debugging task, o
 - **(iii) Mechanized layer — not adopted**: a watchdog that detects N round-trips plus an unchanged goal sentence was **not adopted** (operator, 2026-08-02: "proceed only through gate (ii)").
 - Case-specific basis, room for situational re-judgment, operator has final say (§6). Subject to sync across your deployed harness copies — see [porting-infra](porting-infra.md). (Source discussion dated 2026-07-30; see your incident log.)
 
+## 1.9 Pre-check before starting a provisionally assigned ledger row (operator, 2026-09-09 — distinguish rows already reflected in code/rules/skills/config from rows only quoted in a note or log)
+- Before starting a ledger row that was provisionally assigned or handed over, run the pre-check script once for that owner.
+- For any row it flags as a possible match, open the diff of the matching commit and judge whether the work was actually reflected in code, rules, skills, or config files, or merely quoted in a meeting note, log, or mirror copy.
+- If it was reflected, close the row with a one-line receipt pointing to the exact file and line (or commit hash). If it was only quoted, leave the row's status unchanged and add a note explaining it was a false match.
+- Only rows the script does not flag should be started as new work.
+- The bot starting the row is responsible for writing the receipt or note directly on that row; the script's own exclusion list for quoted sources is the reference to follow, not a copy kept in this document. (vault docs/rules-full/skill-process.md, 2026-09-09)
+
 ## 2. brainstorming HARD-GATE
 - The pattern "let's build X" = no implementation or scaffolding before a design is presented and approved. **Exception**: if the user explicitly says "proceed" plus a standing autonomous-operation instruction is in force, the approval gate is overridden — design inline, then implement ([autonomy](autonomy.md) §1).
 - **Extending an existing deliverable, or producing inside an existing project = check the depth bar first** (regression, 2026-06-08, a lecture-guidebook incident): before producing, use your semantic/knowledge search tool (▶ Fill in: your semantic/knowledge search tool) — not a surface grep — to find and read that project's existing principles, depth, and quality bar, and state the depth/structure/length standard in the spec. Regression: extending "Part 2" of a series produced output at 1/5 the expected thickness (root cause: the relevant prior context was never read). Hard-enforced: your regression-self-check script (▶ Fill in: your regression-self-check script), item #5.
