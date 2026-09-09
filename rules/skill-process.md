@@ -33,8 +33,7 @@ Trigger: starting a build/design task ("let's build X"), a bug/debugging task, o
 - For any row it flags as a possible match, open the diff of the matching commit and judge whether the work was actually reflected in code, rules, skills, or config files, or merely quoted in a meeting note, log, or mirror copy.
 - If it was reflected, close the row with a one-line receipt pointing to the exact file and line (or commit hash). If it was only quoted, leave the row's status unchanged and add a note explaining it was a false match.
 - Only rows the script does not flag should be started as new work.
-- The bot starting the row is responsible for writing the receipt or note directly on that row; the script's own exclusion list for quoted sources is the reference to follow, not a copy kept in this document.
-(vault docs/rules-full/skill-process.md, 2026-09-09)
+- The bot starting the row is responsible for writing the receipt or note directly on that row; the script's own exclusion list for quoted sources is the reference to follow, not a copy kept in this document. (vault docs/rules-full/skill-process.md, 2026-09-09)
 
 ## 2. brainstorming HARD-GATE
 - The pattern "let's build X" = no implementation or scaffolding before a design is presented and approved. **Exception**: if the user explicitly says "proceed" plus a standing autonomous-operation instruction is in force, the approval gate is overridden — design inline, then implement ([autonomy](autonomy.md) §1).
