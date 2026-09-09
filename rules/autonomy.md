@@ -47,7 +47,11 @@ Triggers: the moment you're tempted to ask the user to confirm at every step, or
 - Case-by-case; use judgment (does not apply to small one-off tasks); operator has final say (see [skill-process](skill-process.md) §6). -> ▶ Fill in: link to your internal plan doc (item 30), section G2 (dated 2026-08-05).
 
 ## 2.10-c No re-asking the operator about finished projects (operator, 2026-09-09 -- release condition tied to an already-finished project's confirmation)
-If a deferred ledger row's release condition is "wait for the operator to confirm," and that confirmation is tied to a project or delivery that has already finished, do not raise it to the operator again. Close the row as not applicable instead. Check this once, based on the project's actual closing record (its outcome note or its calendar end date) rather than memory or a guess. The bot that defers the row writes the note "finished project: <name>" directly on that row. Exception: if the same finished project still has an open follow-up contract, re-engagement, or maintenance window, it is not closed — the release condition should instead point to that open window.
+
+- If a deferred ledger row's release condition is "wait for the operator to confirm," and that confirmation is tied to a project or delivery that has already finished, do not raise it to the operator again. Close the row as not applicable instead.
+- Check this once, based on the project's actual closing record (its outcome note or its calendar end date) rather than memory or a guess.
+- The bot that defers the row writes the note "finished project: <name>" directly on that row.
+- Exception: if the same finished project still has an open follow-up contract, re-engagement, or maintenance window, it is not closed — the release condition should instead point to that open window.
 (vault docs/rules-full/autonomy.md, 2026-09-09)
 
 ## 3. No manufactured busywork
