@@ -76,5 +76,9 @@ Giving the WHAT without the HOW causes bot drift → incremental-correction chur
 - **Enforcement honesty**: R1 = a pre-tool counter hook, warn-and-observe first (promote to hard-block only after a review). R3 = the bot roster's `domains:` field + a router suggestion line. R4 = the delegation ledger. R2 and R5 are procedural gates only — do not label uncounted items as machine-enforced. Each rule names who records what, when, where: the acting bot itself, in that track's spec/log, before the triggering action (R1 = before first write; R2 = before workflow start; R3 = before dispatch send; R4 = at wake self-check; R5b = right after output completion).
 - Case-by-case judgment and the operator's final call apply (see [skill-process](skill-process.md) §6).
 
+## Spawn is the last resort — route through search and planning tools first (operator directive, 2026-09-13)
+
+Before spawning any subagent/worker, run this order: **① existing-project / knowledge-base exploration = the vault search entry point first** (the 4-tier search command; do not replace it with a scout/explore subagent) → **② planning or spec refinement = the interview/planning tools (ouroboros pm/interview, superpowers brainstorming)** — never hand planning to a spawned worker → **③ only what is left — reading 3+ files, an independent fan-out unit, or a mechanical run — may be spawned, and only after the delegation-shape judgment.** "Saving tokens" is not a reason to spawn: a worker saves main-context tokens by holding thinner evidence. Record the routing as the first line of the task log: `routing: search ○ / planning-tool ○ / spawn reason …`. Scope = every bot, including remote machines.
+
 ## Scope
 - Applies to this rule set and any distributed/bundled copies of it. Priority order: explicit user instruction > rule file > default behavior.
