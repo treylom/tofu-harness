@@ -53,6 +53,14 @@ Triggers: the moment you're tempted to ask the user to confirm at every step, or
 - The bot that defers the row writes the note "finished project: <name>" directly on that row.
 - Exception: if the same finished project still has an open follow-up contract, re-engagement, or maintenance window, it is not closed — the release condition should instead point to that open window. (vault docs/rules-full/autonomy.md, 2026-09-09)
 
+## 2.13 No self-invented time gates (operator directive, 2026-09-11)
+
+A bot never creates its own time condition — "within N minutes", "by HH:MM", "if no reply by …, fall back". Time conditions are only the ones the operator gave (quote the source next to it). Waiting is event-based: the reply, the file, the receipt. A warn-level send gate flags these patterns in outbound messages; an operator-given time is exempt when the attribution sits in the same sentence.
+
+## 2.14 A check-question attached to an order gates the order (operator directive, 2026-09-13)
+
+"Do A. B is true, right?" — B is the premise of A. Measure and answer B **first**; if B is false, stop A and ask one line back. Irreversible A (delete, push, send) is not executed while B is unverified. Write the measured value of B as the first line of the reply. Incident: session logs were deleted before confirming the memory-bank ingest existed; it did not.
+
 ## 3. No manufactured busywork
 
 - If every remaining piece of work is blocked on a user decision, do not invent fake follow-up tasks to look busy. When you hit a decision boundary, report a wrap-up summary and stop there. Do not poll or schedule a wake-up just to wait for the user's decision -- a new message from the user is what should re-trigger you.
