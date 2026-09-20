@@ -43,6 +43,7 @@ way through, that's a bug in the gate — file it.
 | `branch-stray-guard.sh` *(opt-in)* | warns when an unattended auto-commit lands knowledge/note files on a non-default branch, where they vanish from the default branch's history. | `Stop` |
 | `skill-step-gate.py` *(opt-in)* | catches "skill invoked, steps skipped": a skill can inject its whole spec into context and still get run without producing the output it requires. Register a skill's checkable output shape (a code block, a named role, a saved artifact) in a project-root `skill-contracts.json`; if the registered skill was invoked and the last-invoke window is missing a registered surface, the stop bounces once naming exactly what's missing. No registry file = no-op. See [`../rules/skill-contracts.md`](../rules/skill-contracts.md). | `Stop` |
 | `skill-step-inject.py` *(opt-in, pairs with `skill-step-gate.py`)* | the moment a registered skill is invoked, surfaces that skill's checklist into context immediately — prevention before the Stop-gate ever needs to catch anything. Reads the same `skill-contracts.json`; no registry or no matching entry = silent no-op. | `PostToolUse` (matcher: `Skill`) |
+| `discord-readability-gate.py` *(opt-in, channel bots)* | if an outbound channel message (Discord reply / edit_message) is one solid block (≥ 350 chars, no line break), a ≥ 300-char line stuffed with 5+ " · " separators, or any ≥ 600-char line outside a code fence, denies the send with the required shape in the deny text; fix and resend passes. One-shot bypass for tables/code via `--allow-once "<reason>"` (TTL 600 s, logged). Rule: [`../rules/discord-comms.md`](../rules/discord-comms.md) §1-c. | `PreToolUse` (matcher: `mcp__plugin_discord_discord__reply\|mcp__plugin_discord_discord__edit_message`) |
 
 ## Install (Claude Code)
 
@@ -68,7 +69,8 @@ cp tofable/hooks/fable_lib.py tofable/hooks/verify-ledger.py \
 ```
 
 (The opt-in gates — `cutover-review-gate.py`, `requirements-lock.py`,
-`branch-stray-guard.sh`, `skill-step-gate.py`, `skill-step-inject.py` —
+`branch-stray-guard.sh`, `skill-step-gate.py`, `skill-step-inject.py`,
+`discord-readability-gate.py` —
 install the same way when you want them; see their rows above and their
 file headers.)
 
