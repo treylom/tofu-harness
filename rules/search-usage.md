@@ -7,6 +7,18 @@ Trigger: about to search vault/knowledge-base content; right before calling your
 
 > Why: an audit of live search-server traffic on 2026-06-11 (366 sampled queries) found bots converging on MCP default settings without picking a mode, retrying the identical query 9 times in a row with no backoff, and a stale "use the CLI first" instruction that had been injected into every bot's context — a drift nobody had caught. This rule is that audit's fix (labeled G-1 below) plus its own update rule (G-3). Which search tool to reach for at all is decided elsewhere — see your deployment's vault-ops rule §3; this rule is about using the tool you picked well, once you've picked it.
 
+## Search entry points
+
+- **Your knowledge base:** use the installed knowledge-search entry point. With
+  Knowledge Manager, use `/km:search` and let that plugin select its search
+  and fallback tools.
+- **External research:** use SearchFlow when it is installed. An Ouroboros
+  installation that exposes this skill uses `/ouroboros:searchflow` in Claude
+  Code; other runtimes should use the skill name exposed by their installation.
+- SearchFlow is an external research workflow, not a replacement for
+  `/km:search`. These rules do not install either provider. If a provider is
+  unavailable, use the available search tools and state that limitation.
+
 ## 1. Query construction (performance)
 - **Natural-language, keyword-form, 3-7 words** is the best-performing band (366-query sample averaged 5.3 words). Full sentences padded with function words/particles — do not do this.
 - Trust the defaults: hybrid mode, top_k 10, and rerank on are already the tool's tuned defaults — **do not hand-tune weights or mode**. (The audit observed bots attempting manual weight overrides; it had no effect except polluting the cache.)
