@@ -12,8 +12,12 @@ Trigger: on receiving a bug report, at the start of editing a file, right before
 ## 2. Regression prevention before editing a file
 - List existing functionality → analyze blast radius → edit → verify. Write down what could break, first.
 
-## 3. Three-stage verification after a fix
-1. Checklist (only the intended change) 2. Run the test 3. Integration test (no regression in adjacent code). Do not declare "done" without verification (same spirit as superpowers verification-before-completion).
+## 3. Verification matched to the change's impact (2026-10-12 — replaces the fixed three-step check)
+- Wording changes and low-risk, reversible edits: compare the result directly against the intent (only the intended change went in).
+- Behavior changes: run tests that exercise the affected behavior.
+- Shared or security-relevant changes: run the related integration tests and get an independent review.
+- Once the checks the change needs have passed, widen or repeat testing only for a new change, a failure, or an unresolved concern. Permission, security, data-loss checks and checks on real delivery to recipients are never dropped.
+- Never claim done without the verification that fits the change.
 - **3-tier input space** (pattern #7 from an internal deep-reasoning review): where possible, run tests across ① nominal ② deep (extended parameters) ③ boundary (edge cases, skip conditions, off-by-one) — a GREEN that only passed tier ① must say so explicitly (§7 consistency). Especially for scripts, hooks, and collectors with branching exit codes. Small edits may reasonably stop at tier ① alone (situational).
 - **Conflicting verification signals = take a third, stricter measurement** (verify-the-verifier, EP-F3): when a success message conflicts with your own verify step, do not arbitrarily trust one side — settle it with a third, stricter measurement (parse structure, not just grep a string), and keep the **first-pass verify tool itself** as a suspect. May be overkill for small checks (situational). ▶ Fill in: your memory/incident-log reference
 - **Verifying a web deliverable = check the actual final response, not a source grep** (2026-07-05, 2 confirmed internal cases): (a) the **final** HTTP status after redirects + content-type + byte count (b) confirm at the render layer (an SSR comment split a string across nodes, so a contiguous-string grep returned a false 0 — split into separate tokens instead). A grep against a reference source is only a pre-filter, never proof of completion. **This applies to the reviewer too** (⑭, internal decision-item id — 2026-07-29, operator-approved): even before declaring RED, check the render layer (the delivered surface) once — a confirmed case showed pure static parsing misattributed a RED. ▶ Fill in: your memory/incident-log reference. Label source defects (warn) separately from delivery defects (hard). Case-based precedent, operator has final say. ▶ Fill in: link to your internal decision record

@@ -45,7 +45,7 @@ Triggers: right after a model's major release · 90 days (one quarter) since the
 - **Review log**: record the review date and outcome (clean, or N drift items corrected) in one line, either at the bottom of this rule file or in shared memory.
 
 ## 3. When Drift Is Found
-- Fix the affected document immediately (CLAUDE.md, a rule file, memory, a note) and run the 3-step verification described in [code-quality](code-quality.md) §3. Don't let a "this is stale" claim sit unfixed and get repeated as fact — see [source-fact](source-fact.md).
+- Fix the affected document immediately (CLAUDE.md, a rule file, memory, a note) and run the change-matched verification described in [code-quality](code-quality.md) §3. Don't let a "this is stale" claim sit unfixed and get repeated as fact — see [source-fact](source-fact.md).
 
 ## Review Log
 (Example entries below are from the pilot deployment this rule was distilled from — replace with your own as you actually run reviews. Dates are kept verbatim as a worked example of the log format; the actors are genericized.)
