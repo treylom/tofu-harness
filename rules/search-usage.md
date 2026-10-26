@@ -69,3 +69,11 @@ Trigger: about to search vault/knowledge-base content; right before calling your
 - **`search checked:` marker**: an absence assertion about knowledge-base facts ("there is no X / X never existed / cannot find X") must carry, in the same message, `search checked: <top-hit-path-or-no-hit> | query="<actual query>"`. **no-hit counts as success** — it is the license for the absence claim, not a failure. Placeholder forms (`search checked: <...>`) do not count.
 - **Enforcement (if you wire it)**: a Stop hook that blocks a final utterance containing an unevidenced absence assertion, **plus** a PreToolUse hook on your outbound-message tool so the check runs *before* the message leaves — a Stop hook fires after an external send, too late to recall. Pass = search evidence in the recent window, or a valid marker, or an honest hedge label ("unverified / tentative"). Keep idiomatic negatives ("no problem", "no errors") and turn-status reports out of scope — false-positive control (measured 2.1% on a 140-utterance back-test).
 - Case-based; re-judge per situation; the user's explicit instruction always wins.
+
+## 7. Web research — own fetch tools first, the browser agent only where they fail (operator directive, 2026-10-26)
+
+- When research or search needs a web page opened or a video downloaded, use the agent's own tools first (web search, URL fetch, the research skill's page-opening steps, a media download tool). Hand a page to the browser agent (a tool that drives a real, logged-in browser for you) only when those tools cannot open it (login wall, script-only render, blocked fetch); in that fallback the browser agent may run the job on its own, without the usual ask-which-mode step.
+- Acting on a site is not research: logging in, signing up, account or console settings, OAuth, token reissue, filling a shared sheet or form — these keep going through the browser agent (and its ask-which-mode step) as before.
+- Write the condition by purpose (reading for research vs acting on a site), not by tool name (see instruction-fidelity: a tool-named condition was once sidestepped by a different fetch tool).
+
+▶ Fill in: your page-fetch and download tools; your browser-agent tool and its ask-which-mode step, if any.

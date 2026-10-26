@@ -4,7 +4,8 @@
 
 | When you are about to… | read | one-line gist |
 |---|---|---|
-| claim work is done / verified / passing | [verification.md](verification.md) | evidence before claims; state the grade; verify the verifier; quotes & batches checked mechanically |
+| claim work is done / verified / passing | [verification.md](verification.md) | evidence before claims; state the grade; verify the verifier; quotes & batches checked mechanically; rendered line breaks checked line by line before anything public |
+| open a web page or download a video during research | [search-usage.md](search-usage.md) §7 | own fetch/download tools first; the browser agent only where they fail; site tasks (login, settings) stay with it |
 | hand work to a sub-agent / worker / other bot | [delegation.md](delegation.md) | complete HOW up front; check capacity; ack ≠ execution; parallel delegates verified per-delegate |
 | stop, defer, or wrap up with goals remaining | [continuation.md](continuation.md) | real blocker? whose call? reported? — triage waiting/hung/dead |
 | deploy a watcher / write a value another automation reads | [automation.md](automation.md) | self-test on real data variants; exclude yourself; check the consumer's schema, not your memory |
