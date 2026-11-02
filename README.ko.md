@@ -1,6 +1,8 @@
 # tofu-harness (구 `tofable`)
 
 > 🌐 English: **[README.md](README.md)**
+>
+> **규칙 원본**: 규칙 본문의 원본은 이제 [SlackMod](https://github.com/treylom/slackmod)(`rules/general/`)에 있고, 여기 `rules/` 는 이 저장소만으로도 쓸 수 있게 둔 사본입니다. 최신 소식과 관련 저장소 안내도 그곳에서 먼저 갱신합니다.
 
 **AI 에이전트 하네스를 정직하게 유지한다.** 일하는 방식을 규칙과 기계적 게이트로 옮기고, 그 하네스 문서들이 도구·경로·모델에 대해 계속 진실을 말하는지 감사한다.
 
