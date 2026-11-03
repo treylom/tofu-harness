@@ -40,6 +40,7 @@ Trigger: the moment you start (or dispatch) any image generation, editing, label
 - "Keep the existing image as-is, just change the text / a small edit" = **an edit**. No dispatching to a generator ❌, no font-pasting ❌.
 - **Worrying about "the Korean text will get mangled" during an edit = a red flag that you picked the wrong (generator) tool** (fonts/edits don't mangle text).
 - `$imagen` is not banned outright ❌ — the ban applies only to "full generation with no input image." Image-input editing is a legitimate path.
+- **Text inside images is generated too — no overlay plans (operator directive, reinforced 2026-10-30).** For a new image, do not plan, dispatch or promise "we'll add the text separately / overlay it / composite it in layout" unless the user explicitly asks for that. The answer to accuracy worries is: generate, check the text letter by letter, regenerate if it is wrong. The deterministic overlay of §1 stays for edits that must keep pixels exact and for the user-requested case. Background: an overlay plan was proposed for the third time after the generate-by-default rule existed.
 
 ## 4. Edit prompt & verification
 - Prompt: "Edit this exact image. Keep frame/layout/elements 100% unchanged & inside frame. ONLY <the change>. No redraw/recompose, no spill."

@@ -326,6 +326,8 @@ session entering via SessionStart.
   being asked. ▶ Fill in: a pointer to your own planning doc, item G4, if
   you track this as an open item.
 
+- **Answering a liveness check (operator decision, 2026-11-02)**: a participant answers with one `alive` line in the progress file — no bot mention needed. The watchdog and the bot-level ruler read exactly that row.
+
 ### 3.7 Wake-escalation ladder = opt-in, with a pinned-review gate (added 2026-08-12)
 
 If your watchdog escalates beyond notifications (tmux wake keystrokes,
