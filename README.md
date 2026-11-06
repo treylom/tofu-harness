@@ -1,6 +1,8 @@
 # tofu-harness (formerly `tofable`)
 
 > 🇰🇷 **한국어 버전: [README.ko.md](README.ko.md)**
+>
+> **Rules source**: the rule text now lives in [SlackMod](https://github.com/treylom/slackmod) (`rules/general/`); the `rules/` here is a copy kept so this repo works on its own. News and related repositories are updated there first.
 
 **Keep an AI-agent harness honest.** Transfer a working style into rules and mechanical gates, then audit the harness documents themselves so they keep telling the truth about your tools, paths, and models.
 

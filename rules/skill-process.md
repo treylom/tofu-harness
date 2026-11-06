@@ -36,6 +36,8 @@ Trigger: starting a build/design task ("let's build X"), a bug/debugging task, o
 - Only rows the script does not flag should be started as new work.
 - The bot starting the row is responsible for writing the receipt or note directly on that row; the script's own exclusion list for quoted sources is the reference to follow, not a copy kept in this document. (operator directive, 2026-09-09)
 
+- **Next round = move the release condition in the same turn (2026-11-02).** When you dispatch the next round of a task (round N → N+1), change that ledger row's release condition in the same turn so its first event points at the new round. A row left pointing at the old round's report looks like it is waiting for something that will never arrive.
+
 ## 2. brainstorming HARD-GATE
 - The pattern "let's build X" = no implementation or scaffolding before a design is presented and approved. **Exception**: if the user explicitly says "proceed" plus a standing autonomous-operation instruction is in force, the approval gate is overridden — design inline, then implement ([autonomy](autonomy.md) §1).
 - **Extending an existing deliverable, or producing inside an existing project = check the depth bar first** (regression, 2026-06-08, a lecture-guidebook incident): before producing, use your semantic/knowledge search tool (▶ Fill in: your semantic/knowledge search tool) — not a surface grep — to find and read that project's existing principles, depth, and quality bar, and state the depth/structure/length standard in the spec. Regression: extending "Part 2" of a series produced output at 1/5 the expected thickness (root cause: the relevant prior context was never read). Hard-enforced: your regression-self-check script (▶ Fill in: your regression-self-check script), item #5.

@@ -11,6 +11,7 @@ Trigger: on receiving a bug report, at the start of editing a file, right before
 
 ## 2. Regression prevention before editing a file
 - List existing functionality → analyze blast radius → edit → verify. Write down what could break, first.
+- **Regression attribution (2026-11-02)**: say "this was already in the baseline" only from running the **same original input** through both the baseline and the candidate. A result from a similar input with a changed tail does not count (thirteen attributions had to be corrected after this mistake).
 
 ## 3. Verification matched to the change's impact (2026-10-12 — replaces the fixed three-step check)
 - Wording changes and low-risk, reversible edits: compare the result directly against the intent (only the intended change went in).
