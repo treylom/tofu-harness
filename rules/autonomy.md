@@ -46,6 +46,13 @@ Triggers: the moment you're tempted to ask the user to confirm at every step, or
 - **(b) Baseline = the topmost requirements document in the dispatch chain, checked item-by-item 1:1** (regression noted 2026-08-18): comparing only against the most recent dispatch message lets requirements drop silently as work gets relayed or re-issued -- a message from partway down the chain can pass this comparison while the original top-level requirement goes unmet. Before declaring done, trace back to the top-level spec/plan the dispatch chain inherited from, pull its full requirement list, and check it off 1:1; any single unmet item means the task is not complete -- name it, then either carry it over explicitly or re-dispatch it. Owner: the agent making the completion call (including an orchestrator accepting a worker's report), in that same turn.
 - Case-by-case; use judgment (does not apply to small one-off tasks); operator has final say (see [skill-process](skill-process.md) §6). -> ▶ Fill in: link to your internal plan doc (item 30), section G2 (dated 2026-08-05).
 
+### §2.8 addition (2026-11-06) — a final report ends with "Skipped:" and "Could not:"
+
+- A final report to a person ends with two lines, `Skipped:` and `Could not:` (write "none" when there is nothing to list).
+- Which reports: one after which, for the same work, you will not post another "done" without the person's answer — including one that only waits for the person's reply or decision. Examples: "Deleted the two card posts — closing this item." · "Both HTML versions are out." · "I can't run that model; tell me which to use and I'll continue."
+- Not these: progress posts with work still in your hands, "handed it to X" notices, questions only. Examples: "One left — posting the card next." · "Installed; only switching it on remains." · "I'll report completion once it's confirmed."
+- Why: without a written definition, three counts of the same set of reports gave three different numbers; the definition makes the two lines checkable.
+
 ## 2.10-b Event-based release conditions need a check line (2026-11-02)
 - A release condition tied to an event ("at the next restart", "at the next round") is missed unless that event's own procedure has a line that checks for it. Put the check line into the restart procedure, or tie it to a recurring slot such as the weekly review's pre-input.
 - Background: a "propose only" step deferred to the next round was skipped because nothing in that round's procedure looked for it.
