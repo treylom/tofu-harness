@@ -81,8 +81,8 @@ Before reporting a UI/feature "done" or cutting over, three things are mandatory
 - Scope: everything shown outside — HTML, decks, card images, documents, PDFs, video subtitles, text inside images. Internal material that only the maintainer reads is out of scope.
 - When and who: once before every hand-off or publication, by two reviewers — a writing reviewer and a design-side reviewer.
 - What: the *whole* text, not only the changed sentences. A copy review that looks at changed lines is a different job; however many of those passed, zero whole-text polish passes means it does not go out. A deck's multi-axis review does not replace it either.
-- Ask the design-side reviewer for the polish separately from its screen review (one request each). The polish request lists every visible text; the answer comes back as "no. | original | revised". Where the two reviewers' versions overlap, the writing reviewer's version wins.
+- Ask the design-side reviewer for the polish separately from their screen review (one request each). The polish request lists every piece of visible text; answers come back as "No. | Original | Revised". Where the two reviewers' versions overlap, the writing reviewer's version wins.
 - Order: polish first, then the screen review and the rendered line-break check. If the polish comes later, redo the line-break check and the screen review for what changed.
-- Incident: a published route-map page went out after three copy reviews and a screen review, but no whole-text polish; the operator caught it.
+- Incident: the public version of a web page reached the maintainer after three copy reviews and a screen review, but no whole-text polish; the maintainer caught it.
 
 Full details: ▶ Fill in: link to your skills-system code-quality reference (source used an internal skill document).

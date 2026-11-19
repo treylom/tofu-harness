@@ -377,7 +377,7 @@ Background: agenda items kept rolling over to the next meeting without a disposi
 1. **Each agenda item ends in one of three shapes**: "decision + owner + deadline" / "dropped + reason" / "a one-line question for the maintainer". Anything else ("let's revisit", "keep watching") is not an end.
 2. **An item carried over twice is not carried over again**: drop it on the spot or ask the maintainer once — no third carry-over.
 3. **No new agenda items during a meeting**: send them to the agenda backlog for the next meeting.
-4. **When the meeting ends**: when every item has one of the three shapes, or when the time limit written in the meeting call is reached — then the remaining items go through rule 2 and the meeting ends.
+4. **When the meeting ends**: as soon as every item has one of the three shapes. If the time limit written in the meeting call comes first, the remaining items go through rule 2 and then the meeting ends.
 
 - The chair closes with one line at the end of the agenda thread — "N items → a decided · b dropped · c questions" — and reports the same numbers to the maintainer.
 
