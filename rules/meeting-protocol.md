@@ -370,6 +370,17 @@ its 4-file paths + the §1 obligations, (b) a bot-roster table of user IDs,
 (c) a summary of §2 and §4. Changing the hook affects every bot → measure
 and verify before editing it (see [code-quality](code-quality.md)).
 
+## Meeting end conditions — every agenda item ends in one of three shapes (operator directive, 2026-11-07)
+
+Background: agenda items kept rolling over to the next meeting without a disposition, until about thirty had piled up.
+
+1. **Each agenda item ends in one of three shapes**: "decision + owner + deadline" / "dropped + reason" / "a one-line question for the maintainer". Anything else ("let's revisit", "keep watching") is not an end.
+2. **An item carried over twice is not carried over again**: drop it on the spot or ask the maintainer once — no third carry-over.
+3. **No new agenda items during a meeting**: send them to the agenda backlog for the next meeting.
+4. **When the meeting ends**: when every item has one of the three shapes, or when the time limit written in the meeting call is reached — then the remaining items go through rule 2 and the meeting ends.
+
+- The chair closes with one line at the end of the agenda thread — "N items → a decided · b dropped · c questions" — and reports the same numbers to the maintainer.
+
 ## Scope
 
 - Applies to this rule file and any copies distributed to other bots or

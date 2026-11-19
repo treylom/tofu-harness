@@ -72,4 +72,17 @@ Before reporting a UI/feature "done" or cutting over, three things are mandatory
 - **Byproduct-defense caveat**: when a defense built for a different purpose happens to have blocked something, note "not intentional" when you record it — the guarantee is not proven to hold for the next variant outside that defense's original scope (self-correction from an internal reviewer, 2026-07-26).
 - Basis: a 2026-07-25 measurement (**limited to a fixed set of gold residual samples** — scope was narrowed by a named reviewer's judgment; do not quote the ratio outside that scope). Case-based precedent, operator has final say ([skill-process](skill-process.md) §6). ▶ Fill in: link to your internal decision record
 
+## Documentation vs. existing code (operator directive, 2026-10-25)
+
+"When a repository's documentation and its existing code disagree, follow the conventions used in the existing code, and in your final reply point out each inconsistency you found between the documentation and the code."
+
+## Anything published gets one whole-text polish before it goes out (operator directive, 2026-11-19)
+
+- Scope: everything shown outside — HTML, decks, card images, documents, PDFs, video subtitles, text inside images. Internal material that only the maintainer reads is out of scope.
+- When and who: once before every hand-off or publication, by two reviewers — a writing reviewer and a design-side reviewer.
+- What: the *whole* text, not only the changed sentences. A copy review that looks at changed lines is a different job; however many of those passed, zero whole-text polish passes means it does not go out. A deck's multi-axis review does not replace it either.
+- Ask the design-side reviewer for the polish separately from its screen review (one request each). The polish request lists every visible text; the answer comes back as "no. | original | revised". Where the two reviewers' versions overlap, the writing reviewer's version wins.
+- Order: polish first, then the screen review and the rendered line-break check. If the polish comes later, redo the line-break check and the screen review for what changed.
+- Incident: a published route-map page went out after three copy reviews and a screen review, but no whole-text polish; the operator caught it.
+
 Full details: ▶ Fill in: link to your skills-system code-quality reference (source used an internal skill document).
