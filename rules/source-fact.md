@@ -71,6 +71,8 @@ When building or consuming the output of a checker (a health check, a gate, a co
 4. A checker's own survival requires built-in positive and negative controls, and **the type of bait must match the type of defect** (all 3 checker deaths recorded in one day were caught by a positive control).
 - Case-scoped (a 2026-08-05 S1 census, 40 items, plus an S4 empirical follow-up pass); situational re-judgment applies; operator's final call takes precedence ([skill-process](skill-process.md) §6).
 
+- **Reading a lookup script's exit code (2026-11-14).** When a lookup script reports per-axis results, exit code 0 means it judged from the places it looked ("exists", or "absent, with evidence"). A code that means *could not look* (a tool died or returned the wrong shape — for example 3) means "not seen": do not say the term doesn't exist. Read the "looked / not looked / out of scope" lines under the verdict; if anything is "not looked", re-run that axis or report "not seen". Known gaps: a listing tool that exits 0 with a truncated list, and a CLI that exits 0 with empty output.
+
 ## 9. Counting anchor for hook blocks (2026-09-02)
 
 - **Hook-block counts in Claude Code transcripts anchor on `"type":"hook_blocking_error"`.** The keys `"permissionDecision":"deny"` and `"decision":"block"` occur **zero** times across transcripts, so counting on them reports a false "0 blocks". Attribute per hook through the `hookEvent` / `blockingError` labels on the same record (census finding, 2026-09-02).
